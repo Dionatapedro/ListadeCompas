@@ -1,0 +1,388 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+
+    min-height: 100vh;
+
+    padding: 30px 15px;
+
+    background-image:
+        linear-gradient(
+            rgba(255, 255, 255, 0.35),
+            rgba(255, 255, 255, 0.35)
+        ),
+        url("supermercado-novo.png");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+
+.container {
+    width: 100%;
+    max-width: 600px;
+    margin: auto;
+}
+
+
+/* CABEÇALHO */
+
+header {
+    background-color: #1769aa;
+    color: white;
+    text-align: center;
+    padding: 25px;
+    border-radius: 12px 12px 0 0;
+}
+
+header h1 {
+    font-size: 28px;
+    margin-bottom: 8px;
+}
+
+header p {
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+/* FORMULÁRIO */
+
+.formulario {
+    background-color: white;
+    padding: 20px;
+    display: flex;
+    gap: 12px;
+    align-items: end;
+    flex-wrap: wrap;
+}
+
+.campo {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.campo:first-child {
+    flex: 1;
+}
+
+.campo label {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+}
+
+.campo input {
+    height: 42px;
+    padding: 0 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 15px;
+    outline: none;
+}
+
+.campo input:focus {
+    border-color: #1769aa;
+}
+
+/* BOTÃO ADICIONAR */
+
+#btnAdicionar {
+    height: 42px;
+    padding: 0 18px;
+    border: none;
+    border-radius: 6px;
+    background-color: #1769aa;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#btnAdicionar:hover {
+    background-color: #12558b;
+}
+
+/* LISTA */
+
+.lista {
+    background-color: white;
+    margin-top: 15px;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.topo-lista {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.topo-lista h2 {
+    font-size: 20px;
+    color: #333;
+}
+
+#pesquisa {
+    width: 180px;
+    height: 36px;
+    padding: 0 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    outline: none;
+}
+
+.lista-vazia {
+    text-align: center;
+    color: #888;
+    padding: 25px 0;
+}
+
+/* BOTÃO LIMPAR */
+
+.btn-limpar {
+    width: 100%;
+    margin-top: 15px;
+    height: 42px;
+    border: none;
+    border-radius: 8px;
+    background-color: #d9534f;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-limpar:hover {
+    background-color: #c9302c;
+}
+
+/* CELULAR */
+
+@media (max-width: 600px) {
+
+    body {
+        padding: 15px 10px;
+    }
+
+    header h1 {
+        font-size: 24px;
+    }
+
+    .formulario {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .campo {
+        width: 100%;
+    }
+
+    #btnAdicionar {
+        width: 100%;
+    }
+
+    .topo-lista {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    #pesquisa {
+        width: 100%;
+    }
+}
+
+.item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 14px;
+
+    margin-bottom: 10px;
+
+    background-color: #f8f9fa;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+
+    color: #333;
+    font-size: 16px;
+
+    transition: all 0.2s ease;
+}
+
+.item:hover {
+    transform: translateY(-2px);
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+
+    background-color: #ffffff;
+}
+
+.nome-produto {
+    flex: 1;
+
+    cursor: pointer;
+
+    font-weight: 600;
+
+    color: #333;
+
+    transition: all 0.2s ease;
+}
+
+.item strong {
+    background-color: #e8f1f8;
+
+    color: #1769aa;
+
+    min-width: 42px;
+
+    text-align: center;
+
+    padding: 6px 9px;
+
+    border-radius: 8px;
+
+    font-size: 14px;
+}
+
+.nome-produto {
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.nome-produto.comprado {
+    text-decoration: line-through;
+    color: #888;
+}
+
+.btn-excluir {
+    width: 36px;
+    height: 36px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background-color: #fff0f0;
+
+    color: #d9534f;
+
+    cursor: pointer;
+
+    font-size: 16px;
+
+    transition: all 0.2s ease;
+}
+
+.btn-excluir:hover {
+    background-color: #d9534f;
+
+    color: white;
+
+    transform: scale(1.05);
+}
+
+.btn-excluir:hover {
+    transform: scale(1.15);
+}
+
+.produto-comprado {
+    background-color: #f1f8f3;
+
+    border-color: #d7eadb;
+
+    opacity: 0.8;
+}
+
+.produto-comprado .nome-produto {
+    text-decoration: line-through;
+
+    color: #888;
+}
+
+.preco-produto {
+    width: 100px;
+
+    height: 38px;
+
+    padding: 0 10px;
+
+    border: 1px solid #d5d9de;
+
+    border-radius: 8px;
+
+    background-color: white;
+
+    color: #333;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    outline: none;
+
+    transition: all 0.2s ease;
+}
+
+.preco-produto:focus {
+    border-color: #1769aa;
+
+    box-shadow: 0 0 0 3px rgba(23, 105, 170, 0.12);
+}
+
+.preco-produto:focus {
+    outline: none;
+    border-color: #1769aa;
+}
+
+.total-compra {
+    margin-top: 15px;
+
+    background-color: white;
+
+    padding: 18px 20px;
+
+    border-radius: 8px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    font-size: 18px;
+}
+
+.total-compra span {
+    font-weight: bold;
+    color: #333;
+}
+
+.total-compra strong {
+    color: #1769aa;
+    font-size: 22px;
+}
+
+.preco-area {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+}
+
+.subtotal-produto {
+    font-size: 12px;
+    color: #1769aa;
+    font-weight: 600;
+    white-space: nowrap;
+}
