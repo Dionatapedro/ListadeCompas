@@ -1,0 +1,528 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+
+    min-height: 100vh;
+
+    padding: 30px 15px;
+
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.35),
+            rgba(255, 255, 255, 0.35)),
+        url("supermercado-novo.png");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+
+.container {
+    width: 100%;
+    max-width: 600px;
+    margin: auto;
+}
+
+
+/* CABEÇALHO */
+
+header {
+    background-color: #1769aa;
+    color: white;
+    text-align: center;
+    padding: 25px;
+    border-radius: 12px 12px 0 0;
+}
+
+header h1 {
+    font-size: 28px;
+    margin-bottom: 8px;
+}
+
+header p {
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+/* FORMULÁRIO */
+
+.formulario {
+    background-color: white;
+    padding: 20px;
+    display: flex;
+    gap: 12px;
+    align-items: end;
+    flex-wrap: wrap;
+}
+
+.campo {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.campo:first-child {
+    flex: 1;
+}
+
+.campo label {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+}
+
+.campo input {
+    height: 42px;
+    padding: 0 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 15px;
+    outline: none;
+}
+
+.campo input:focus {
+    border-color: #1769aa;
+}
+
+/* BOTÃO ADICIONAR */
+
+#btnAdicionar {
+    height: 42px;
+    padding: 0 18px;
+    border: none;
+    border-radius: 6px;
+    background-color: #1769aa;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#btnAdicionar:hover {
+    background-color: #12558b;
+}
+
+/* LISTA */
+
+.lista {
+    background-color: white;
+    margin-top: 15px;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.topo-lista {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.topo-lista h2 {
+    font-size: 20px;
+    color: #333;
+}
+
+#pesquisa {
+    width: 180px;
+    height: 36px;
+    padding: 0 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    outline: none;
+}
+
+.lista-vazia {
+    text-align: center;
+    color: #888;
+    padding: 25px 0;
+}
+
+/* BOTÃO LIMPAR */
+
+.btn-limpar {
+    width: 100%;
+    margin-top: 15px;
+    height: 42px;
+    border: none;
+    border-radius: 8px;
+    background-color: #d9534f;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-limpar:hover {
+    background-color: #c9302c;
+}
+
+/* CELULAR */
+
+@media (max-width: 600px) {
+
+    body {
+        padding: 15px 10px;
+    }
+
+    header h1 {
+        font-size: 24px;
+    }
+
+    .formulario {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .campo {
+        width: 100%;
+    }
+
+    #btnAdicionar {
+        width: 100%;
+    }
+
+    .topo-lista {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    #pesquisa {
+        width: 100%;
+    }
+
+    .item {
+        grid-template-columns:
+            minmax(0, 1fr) auto 90px 40px;
+
+        gap: 8px;
+
+        padding: 12px;
+    }
+
+    .produto-info {
+        gap: 8px;
+    }
+
+    .checkbox-produto {
+        width: 30px;
+        height: 30px;
+    }
+
+    .quantidade-produto {
+        min-width: 48px;
+        padding: 8px 6px;
+    }
+
+    .preco-produto {
+        width: 90px;
+    }
+
+    .btn-excluir {
+        width: 40px;
+        height: 40px;
+    }
+
+    .subtotal-produto {
+        font-size: 11px;
+    }
+
+    .nome-produto {
+        white-space: normal;
+        overflow-wrap: break-word;
+    }
+}
+
+/* ===============================
+   CARDS DOS PRODUTOS
+   =============================== */
+
+.item {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr) auto 100px 40px;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 14px;
+
+    margin-bottom: 10px;
+
+    background-color: #f8f9fa;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 12px;
+
+    color: #333;
+
+    font-size: 16px;
+
+    transition: all 0.2s ease;
+
+    width: 100%;
+
+    min-height: 72px;
+}
+
+
+.item:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.08);
+
+    background-color: #ffffff;
+}
+
+
+/* ===============================
+   NOME + CHECKBOX
+   =============================== */
+
+.produto-info {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    min-width: 0;
+
+    cursor: pointer;
+}
+
+
+/* CHECKBOX GRANDE */
+
+.checkbox-produto {
+    width: 30px;
+    height: 30px;
+
+    flex-shrink: 0;
+
+    cursor: pointer;
+
+    accent-color: #1769aa;
+}
+
+
+/* NOME DO PRODUTO */
+
+.nome-produto {
+    min-width: 0;
+
+    overflow-wrap: normal;
+
+    word-break: normal;
+
+    font-weight: 600;
+
+    color: #333;
+
+    line-height: 1.25;
+
+    cursor: pointer;
+}
+
+
+/* ===============================
+   QUANTIDADE
+   =============================== */
+
+.quantidade-produto {
+    background-color: #e8f1f8;
+
+    color: #1769aa;
+
+    min-width: 50px;
+
+    text-align: center;
+
+    padding: 8px 9px;
+
+    border-radius: 8px;
+
+    font-size: 14px;
+
+    white-space: nowrap;
+}
+
+
+/* ===============================
+   PREÇO
+   =============================== */
+
+.preco-area {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: flex-end;
+
+    gap: 4px;
+
+    min-width: 0;
+}
+
+
+.preco-produto {
+    width: 100px;
+
+    height: 38px;
+
+    padding: 0 10px;
+
+    border: 1px solid #d5d9de;
+
+    border-radius: 8px;
+
+    background-color: white;
+
+    color: #333;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    outline: none;
+
+    transition: all 0.2s ease;
+}
+
+
+.preco-produto:focus {
+    border-color: #1769aa;
+
+    box-shadow:
+        0 0 0 3px rgba(23, 105, 170, 0.12);
+}
+
+
+/* ===============================
+   SUBTOTAL
+   =============================== */
+
+.subtotal-produto {
+    font-size: 12px;
+
+    color: #1769aa;
+
+    font-weight: 600;
+
+    white-space: nowrap;
+}
+
+
+/* ===============================
+   BOTÃO EXCLUIR
+   =============================== */
+
+.btn-excluir {
+    width: 40px;
+
+    height: 40px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background-color: #fff0f0;
+
+    color: #d9534f;
+
+    cursor: pointer;
+
+    font-size: 18px;
+
+    transition: all 0.2s ease;
+
+    flex-shrink: 0;
+}
+
+
+.btn-excluir:hover {
+    background-color: #d9534f;
+
+    color: white;
+
+    transform: scale(1.05);
+}
+
+
+/* ===============================
+   PRODUTO COMPRADO
+   =============================== */
+
+.produto-comprado {
+    background-color: #f1f8f3;
+
+    border-color: #d7eadb;
+
+    opacity: 0.8;
+}
+
+
+.produto-comprado .nome-produto {
+    text-decoration: line-through;
+
+    color: #888;
+}
+
+/* ===============================
+   TOTAL DA COMPRA
+   =============================== */
+
+.total-compra {
+    margin-top: 18px;
+
+    background-color: white;
+
+    padding: 20px;
+
+    border-radius: 12px;
+
+    border: 2px solid #e5e7eb;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    gap: 5px;
+}
+
+.total-compra span {
+    font-size: 15px;
+
+    font-weight: bold;
+
+    color: #666;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.5px;
+}
+
+.total-compra strong {
+    font-size: 30px;
+
+    font-weight: bold;
+
+    color: #1769aa;
+}
