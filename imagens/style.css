@@ -199,11 +199,62 @@ header p {
     #pesquisa {
         width: 100%;
     }
+
+        .item {
+        grid-template-columns:
+            minmax(0, 1fr)
+            auto
+            90px
+            40px;
+
+        gap: 8px;
+
+        padding: 12px;
+    }
+
+    .produto-info {
+        gap: 8px;
+    }
+
+    .checkbox-produto {
+        width: 30px;
+        height: 30px;
+    }
+
+    .quantidade-produto {
+        min-width: 48px;
+        padding: 8px 6px;
+    }
+
+    .preco-produto {
+        width: 90px;
+    }
+
+    .btn-excluir {
+        width: 40px;
+        height: 40px;
+    }
+
+    .subtotal-produto {
+        font-size: 11px;
+    }
 }
 
+/* ===============================
+   CARDS DOS PRODUTOS
+   =============================== */
+
 .item {
-    display: flex;
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        auto
+        100px
+        40px;
+
     align-items: center;
+
     gap: 12px;
 
     padding: 14px;
@@ -213,104 +264,120 @@ header p {
     background-color: #f8f9fa;
 
     border: 1px solid #e5e7eb;
+
     border-radius: 12px;
 
     color: #333;
+
     font-size: 16px;
 
     transition: all 0.2s ease;
+
+    width: 100%;
+
+    min-height: 72px;
 }
+
 
 .item:hover {
     transform: translateY(-2px);
 
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.08);
 
     background-color: #ffffff;
 }
 
-.nome-produto {
-    flex: 1;
+
+/* ===============================
+   NOME + CHECKBOX
+   =============================== */
+
+.produto-info {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    min-width: 0;
 
     cursor: pointer;
+}
+
+
+/* CHECKBOX GRANDE */
+
+.checkbox-produto {
+    width: 30px;
+    height: 30px;
+
+    flex-shrink: 0;
+
+    cursor: pointer;
+
+    accent-color: #1769aa;
+}
+
+
+/* NOME DO PRODUTO */
+
+.nome-produto {
+    min-width: 0;
+
+    overflow-wrap: anywhere;
+
+    word-break: break-word;
 
     font-weight: 600;
 
     color: #333;
 
-    transition: all 0.2s ease;
+    line-height: 1.25;
+
+    cursor: pointer;
 }
 
-.item strong {
+
+/* ===============================
+   QUANTIDADE
+   =============================== */
+
+.quantidade-produto {
     background-color: #e8f1f8;
 
     color: #1769aa;
 
-    min-width: 42px;
+    min-width: 50px;
 
     text-align: center;
 
-    padding: 6px 9px;
+    padding: 8px 9px;
 
     border-radius: 8px;
 
     font-size: 14px;
+
+    white-space: nowrap;
 }
 
-.nome-produto {
-    cursor: pointer;
-    transition: 0.2s;
+
+/* ===============================
+   PREÇO
+   =============================== */
+
+.preco-area {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: flex-end;
+
+    gap: 4px;
+
+    min-width: 0;
 }
 
-.nome-produto.comprado {
-    text-decoration: line-through;
-    color: #888;
-}
-
-.btn-excluir {
-    width: 36px;
-    height: 36px;
-
-    border: none;
-
-    border-radius: 8px;
-
-    background-color: #fff0f0;
-
-    color: #d9534f;
-
-    cursor: pointer;
-
-    font-size: 16px;
-
-    transition: all 0.2s ease;
-}
-
-.btn-excluir:hover {
-    background-color: #d9534f;
-
-    color: white;
-
-    transform: scale(1.05);
-}
-
-.btn-excluir:hover {
-    transform: scale(1.15);
-}
-
-.produto-comprado {
-    background-color: #f1f8f3;
-
-    border-color: #d7eadb;
-
-    opacity: 0.8;
-}
-
-.produto-comprado .nome-produto {
-    text-decoration: line-through;
-
-    color: #888;
-}
 
 .preco-produto {
     width: 100px;
@@ -336,53 +403,129 @@ header p {
     transition: all 0.2s ease;
 }
 
+
 .preco-produto:focus {
     border-color: #1769aa;
 
-    box-shadow: 0 0 0 3px rgba(23, 105, 170, 0.12);
+    box-shadow:
+        0 0 0 3px rgba(23, 105, 170, 0.12);
 }
 
-.preco-produto:focus {
-    outline: none;
-    border-color: #1769aa;
-}
 
-.total-compra {
-    margin-top: 15px;
-
-    background-color: white;
-
-    padding: 18px 20px;
-
-    border-radius: 8px;
-
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    font-size: 18px;
-}
-
-.total-compra span {
-    font-weight: bold;
-    color: #333;
-}
-
-.total-compra strong {
-    color: #1769aa;
-    font-size: 22px;
-}
-
-.preco-area {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 4px;
-}
+/* ===============================
+   SUBTOTAL
+   =============================== */
 
 .subtotal-produto {
     font-size: 12px;
+
     color: #1769aa;
+
     font-weight: 600;
+
     white-space: nowrap;
+}
+
+
+/* ===============================
+   BOTÃO EXCLUIR
+   =============================== */
+
+.btn-excluir {
+    width: 40px;
+
+    height: 40px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background-color: #fff0f0;
+
+    color: #d9534f;
+
+    cursor: pointer;
+
+    font-size: 18px;
+
+    transition: all 0.2s ease;
+
+    flex-shrink: 0;
+}
+
+
+.btn-excluir:hover {
+    background-color: #d9534f;
+
+    color: white;
+
+    transform: scale(1.05);
+}
+
+
+/* ===============================
+   PRODUTO COMPRADO
+   =============================== */
+
+.produto-comprado {
+    background-color: #f1f8f3;
+
+    border-color: #d7eadb;
+
+    opacity: 0.8;
+}
+
+
+.produto-comprado .nome-produto {
+    text-decoration: line-through;
+
+    color: #888;
+}
+
+/* ===============================
+   TOTAL DA COMPRA
+   =============================== */
+
+.total-compra {
+    margin-top: 18px;
+
+    background-color: white;
+
+    padding: 20px;
+
+    border-radius: 12px;
+
+    border: 2px solid #e5e7eb;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    gap: 5px;
+}
+
+.total-compra span {
+    font-size: 15px;
+
+    font-weight: bold;
+
+    color: #666;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.5px;
+}
+
+.total-compra strong {
+    font-size: 30px;
+
+    font-weight: bold;
+
+    color: #1769aa;
 }

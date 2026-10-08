@@ -58,6 +58,8 @@ btnAdicionar.addEventListener("click", function () {
 
     mostrarProdutos();
 
+    calcularTotal();
+
     produto.value = "";
     quantidade.value = 1;
 
@@ -82,6 +84,7 @@ function mostrarProdutos(filtro = "") {
 
     });
 
+
     if (produtosFiltrados.length === 0) {
 
         if (filtro === "") {
@@ -105,6 +108,7 @@ function mostrarProdutos(filtro = "") {
         return;
     }
 
+
     produtosFiltrados.forEach(function (produto) {
 
         const index = produtos.indexOf(produto);
@@ -113,59 +117,82 @@ function mostrarProdutos(filtro = "") {
 
         item.classList.add("item");
 
+
         if (produto.comprado) {
             item.classList.add("produto-comprado");
         }
 
-        const quantidade = Number(produto.quantidade);
+
+        const quantidadeProduto = Number(produto.quantidade);
+
         const preco = Number(produto.preco || 0);
 
-        const subtotal = quantidade * preco;
+        const subtotal = quantidadeProduto * preco;
+
 
         item.innerHTML = `
-        <span 
-            class="nome-produto"
-            data-index="${index}"
-        >
-            ${produto.comprado ? "☑" : "☐"} ${produto.nome}
-        </span>
 
-        <strong>
-            ${quantidade} un.
-        </strong>
+            <label class="produto-info">
 
-        <div class="preco-area">
+                <input
+                    type="checkbox"
+                    class="checkbox-produto"
+                    data-index="${index}"
+                    ${produto.comprado ? "checked" : ""}
+                >
 
-          <input 
-            type="text"
-            class="preco-produto"
-            data-index="${index}"
-            value="${produto.preco ? produto.preco.toString().replace(".", ",") : ""}"
-            placeholder="Preço"
-            inputmode="decimal"
+                <span class="nome-produto">
+                    ${produto.nome}
+                </span>
+
+            </label>
+
+
+            <strong class="quantidade-produto">
+                ${quantidadeProduto} un.
+            </strong>
+
+
+            <div class="preco-area">
+
+                <input
+                    type="text"
+                    class="preco-produto"
+                    data-index="${index}"
+                    value="${produto.preco ? produto.preco.toString().replace(".", ",") : ""}"
+                    placeholder="Preço"
+                    inputmode="decimal"
+                >
+
+                <small class="subtotal-produto">
+                    Subtotal:
+                    ${subtotal.toLocaleString("pt-BR", {
+                        style: "currency",
+                        currency: "BRL"
+                    })}
+                </small>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="btn-excluir"
+                data-index="${index}"
+                aria-label="Excluir produto"
             >
+                🗑️
+            </button>
 
-            <small class="subtotal-produto">
-                Subtotal: ${subtotal.toLocaleString("pt-BR", {
-            style: "currency",
-            currency: "BRL"
-        })}
-            </small>
+        `;
 
-        </div>
-
-        <button 
-            class="btn-excluir"
-            data-index="${index}"
-        >
-            🗑️
-        </button>
-    `;
 
         listaProdutos.appendChild(item);
 
     });
+
 }
+
 
 // ===============================
 // CLIQUE NOS PRODUTOS
@@ -173,22 +200,9 @@ function mostrarProdutos(filtro = "") {
 
 listaProdutos.addEventListener("click", function (event) {
 
-    // MARCAR COMO COMPRADO
-
-    if (event.target.classList.contains("nome-produto")) {
-
-        const index = event.target.dataset.index;
-
-        produtos[index].comprado =
-            !produtos[index].comprado;
-
-        salvarProdutos();
-
-        mostrarProdutos(pesquisa.value);
-    }
-
-
+    // ===============================
     // EXCLUIR PRODUTO
+    // ===============================
 
     if (event.target.classList.contains("btn-excluir")) {
 
@@ -199,6 +213,32 @@ listaProdutos.addEventListener("click", function (event) {
         salvarProdutos();
 
         mostrarProdutos(pesquisa.value);
+
+        calcularTotal();
+
+        return;
+    }
+
+});
+
+
+// ===============================
+// MARCAR / DESMARCAR PRODUTO
+// ===============================
+
+listaProdutos.addEventListener("change", function (event) {
+
+    if (event.target.classList.contains("checkbox-produto")) {
+
+        const index = event.target.dataset.index;
+
+        produtos[index].comprado = event.target.checked;
+
+        salvarProdutos();
+
+        mostrarProdutos(pesquisa.value);
+
+        calcularTotal();
     }
 
 });
@@ -225,23 +265,30 @@ function salvarProdutos() {
 btnLimpar.addEventListener("click", function () {
 
     if (produtos.length === 0) {
+
         alert("A lista já está vazia!");
+
         return;
     }
+
 
     const confirmar = confirm(
         "Tem certeza que deseja limpar toda a lista?"
     );
 
+
     if (!confirmar) {
         return;
     }
+
 
     produtos = [];
 
     salvarProdutos();
 
     mostrarProdutos();
+
+    calcularTotal();
 
 });
 
@@ -258,6 +305,11 @@ pesquisa.addEventListener("input", function () {
 
 });
 
+
+// ===============================
+// ALTERAR PREÇO
+// ===============================
+
 listaProdutos.addEventListener("input", function (event) {
 
     if (event.target.classList.contains("preco-produto")) {
@@ -270,20 +322,30 @@ listaProdutos.addEventListener("input", function (event) {
             valorDigitado.replace(",", ".")
         );
 
+
         produtos[index].preco = isNaN(valorNumerico)
             ? 0
             : valorNumerico;
+
 
         salvarProdutos();
 
         calcularTotal();
 
-        const quantidade = Number(produtos[index].quantidade);
 
-        const subtotal = quantidade * produtos[index].preco;
+        const quantidadeProduto =
+            Number(produtos[index].quantidade);
+
+
+        const subtotal =
+            quantidadeProduto * produtos[index].preco;
+
 
         const subtotalElemento =
-            event.target.parentElement.querySelector(".subtotal-produto");
+            event.target.parentElement.querySelector(
+                ".subtotal-produto"
+            );
+
 
         subtotalElemento.textContent =
             "Subtotal: " +
@@ -291,25 +353,39 @@ listaProdutos.addEventListener("input", function (event) {
                 style: "currency",
                 currency: "BRL"
             });
+
     }
 
 });
+
+
+// ===============================
+// CALCULAR TOTAL
+// ===============================
 
 function calcularTotal() {
 
     let total = 0;
 
+
     produtos.forEach(function (produto) {
 
-        const quantidade = Number(produto.quantidade);
-        const preco = Number(produto.preco || 0);
+        const quantidadeProduto =
+            Number(produto.quantidade);
 
-        total += quantidade * preco;
+        const preco =
+            Number(produto.preco || 0);
+
+
+        total += quantidadeProduto * preco;
 
     });
 
-    totalCompra.textContent = total.toLocaleString("pt-BR", {
-        style: "currency",
-        currency: "BRL"
-    })
+
+    totalCompra.textContent =
+        total.toLocaleString("pt-BR", {
+            style: "currency",
+            currency: "BRL"
+        });
+
 }
