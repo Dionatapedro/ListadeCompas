@@ -526,3 +526,155 @@ header p {
 
     color: #1769aa;
 }
+
+
+/* =================================
+   CORREÇÃO DO LAYOUT MOBILE
+   ================================= */
+
+@media (max-width: 600px) {
+
+    body {
+        padding: 12px 8px;
+    }
+
+    .container {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        margin: 0 auto;
+    }
+
+    .lista {
+        width: 100%;
+        min-width: 0;
+        padding: 12px;
+        overflow: visible;
+    }
+
+    #listaProdutos {
+        width: 100%;
+        min-width: 0;
+        height: auto;
+        max-height: none;
+        overflow: visible;
+    }
+
+    /* Card dividido em duas linhas */
+    .item {
+        display: grid;
+
+        grid-template-columns: minmax(0, 1fr) auto 40px;
+
+        grid-template-areas:
+            "info quantidade excluir"
+            "preco preco preco";
+
+        align-items: center;
+        gap: 12px 8px;
+
+        width: 100%;
+        min-width: 0;
+        height: auto;
+        min-height: 0;
+
+        padding: 12px;
+        margin-bottom: 10px;
+
+        box-sizing: border-box;
+    }
+
+    /* Nome e checkbox */
+
+    .produto-info {
+        grid-area: info;
+
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        width: 100%;
+        min-width: 0;
+    }
+
+    .checkbox-produto {
+        width: 30px;
+        height: 30px;
+
+        flex-shrink: 0;
+        cursor: pointer;
+        accent-color: #1769aa;
+    }
+
+    .nome-produto {
+        display: block;
+
+        flex: 1;
+        min-width: 0;
+
+        white-space: normal;
+        overflow-wrap: break-word;
+        word-break: normal;
+
+        font-size: 15px;
+        line-height: 1.35;
+    }
+
+
+    /* Quantidade */
+    .quantidade-produto {
+        grid-area: quantidade;
+        min-width: 48px;
+        padding: 7px 6px;
+        font-size: 13px;
+        white-space: nowrap;
+    }
+
+    /* Excluir */
+    .btn-excluir {
+        grid-area: excluir;
+
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+    }
+
+    /* Preço e subtotal na segunda linha */
+    .preco-area {
+        grid-area: preco;
+
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+
+        align-items: center;
+        justify-content: flex-end;
+        gap: 8px;
+
+        width: 100%;
+        min-width: 0;
+    }
+
+    .preco-produto {
+        width: 100px;
+        max-width: 45%;
+        height: 40px;
+        font-size: 16px;
+    }
+
+    .subtotal-produto {
+        font-size: 12px;
+        white-space: normal;
+        text-align: right;
+    }
+
+    /* Total da compra */
+    .total-compra {
+        width: 100%;
+        padding: 18px 12px;
+    }
+
+    .total-compra strong {
+        font-size: 30px;
+    }
+}
